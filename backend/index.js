@@ -6,10 +6,11 @@ const port = process.env.PORT || 3000;
 const mongoose = require('./config/db');
 mongoose();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-    res.send('welcome to hospital management system')
-})
+app.use("/auth", require("./routes/auth.routes"));
+
 app.get("/health", (req, res) => {
     res.json({ status: 'ok', message: 'api is working fine' })
 });
