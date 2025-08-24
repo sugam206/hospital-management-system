@@ -16,7 +16,7 @@ exports.signup = async (req, res) => {
             username,
             password: hashPassword,
             email,
-            role,
+            role: role || "PATIENTS",
         });
         res.status(201).json({ message: "user created sucessfully", user: newUser })
     } catch (error) {
