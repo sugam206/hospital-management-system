@@ -16,7 +16,7 @@ exports.auth = (req, res, next) => {
         req.user = decode;
         next();
     } catch (error) {
-        res.status(404).json({ message: "unauthorized" });
+        res.status(401).json({ message: "unauthorized", error: error.message });
     }
 
 };

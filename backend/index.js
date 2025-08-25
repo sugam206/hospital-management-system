@@ -8,12 +8,14 @@ mongoose();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const { errorHandler } = require("./middleware/errorHandler");
 
 app.use("/auth", require("./routes/auth.routes"));
 app.use("/admin", require("./routes/admin.routes"));
 app.use("/doctor", require("./routes/doctor.routes"));
 app.use("/nurse", require("./routes/nurse.routes"));
 app.use("/reception", require("./routes/reception.routes"));
+app.use(errorHandler);
 
 app.get("/health", (req, res) => {
     res.json({ status: 'ok', message: 'api is working fine' })
