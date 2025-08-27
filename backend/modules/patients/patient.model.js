@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const emergencyContactSchema = new mongoose.Schema({
     name: { type: String, required: true },
     phone: { type: String, required: true },
-    relation: { type: string, required: true }
+    relation: { type: String, required: true }
 });
 
 const patientSchema = new mongoose.Schema({
-    mrn: { type: String, required: true, unique: true, indexed: true },
+    mrn: { type: String, required: true, unique: true, index: true },
     name: {
         first: { type: String, required: true },
         last: { type: String, required: true }
@@ -24,10 +24,10 @@ const patientSchema = new mongoose.Schema({
 
 
 
-}, { timestampls: true });
+}, { timestamps: true });
 patientSchema.statics.generateMRN = async function () {
-    const count = await this.countDocument();
-    const seq = (count + 1).toSting().padStart(4, "0");
+    const count = await this.countDocuments();
+    const seq = (count + 1).toString().padStart(4, "0");
     const date = new date();
     const datePart = today.toISOString().split("T")[0].replace(/-/g, "");
     return `P-${datePart}-${seq}`;
