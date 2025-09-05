@@ -5,7 +5,8 @@ dotenv.config({ path: './config/.env' });
 const port = process.env.PORT || 3000;
 const mongoose = require('./config/db');
 mongoose();
-
+const cors = require("cors");
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const { errorHandler } = require("./middleware/errorHandler");
@@ -15,9 +16,10 @@ app.use("/admin", require("./routes/admin.routes"));
 app.use("/doctor", require("./routes/doctor.routes"));
 app.use("/nurse", require("./routes/nurse.routes"));
 app.use("/reception", require("./routes/reception.routes"));
+app.use("/api/patients", require("./routes/patients.routes"))
 app.use(errorHandler);
 
-app.get("/health", (req, res) => {
+app.get("/api", (req, res) => {
     res.json({ status: 'ok', message: 'api is working fine' })
 });
 app.listen(port, () => {

@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const patientController = require("../controllers/patientController");
-const authorizeRoles = require("../middlewares/authorizeRoles");
-const authMiddleware = require("../middlewares/authMiddleware"); // assumes JWT auth
+const patientController = require("../controller/patients.controller");
+const { checkRole } = require("../middleware/rbac");
+const { auth } = require("../middleware/auth"); // assumes JWT auth
 
 // Protect all routes
-router.use(authMiddleware);
+router.use(auth);
 
-router.post("/", authorizeRoles("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.createPatient);
-router.get("/", authorizeRoles("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.getPatients);
-router.get("/:id", authorizeRoles("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.getPatientById);
-router.put("/:id", authorizeRoles("ADMIN", "DOCTOR"), patientController.updatePatient);
-router.delete("/:id", authorizeRoles("ADMIN"), patientController.deletePatient);
+router.post("/", checkRole("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.createPatients);
+router.get("/", checkRole("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.getPatients);
+router.get("/:id", checkRole("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.getPatientsById);
+router.put("/:id", checkRole("ADMIN", "DOCTOR"), patientController.updatePatient);
+router.delete("/:id", checkRole("ADMIN"), patientController.deletePatient);
 
 module.exports = router;
