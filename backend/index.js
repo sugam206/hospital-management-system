@@ -18,6 +18,9 @@ app.use("/nurse", require("./routes/nurse.routes"));
 app.use("/reception", require("./routes/reception.routes"));
 app.use("/api/patients", require("./routes/patients.routes"))
 app.use(errorHandler);
+app.get("/", (req, res) => {
+    res.json({ status: "okay", message: "it`s working " })
+});
 
 app.get("/api", (req, res) => {
     res.json({ status: 'ok', message: 'api is working fine' })

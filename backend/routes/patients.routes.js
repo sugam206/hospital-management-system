@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const patientController = require("../controller/patients.controller");
 const { checkRole } = require("../middleware/rbac");
-const { auth } = require("../middleware/auth"); // assumes JWT auth
+const { auth } = require("../middleware/auth");
 
-// Protect all routes
+
 router.use(auth);
 
 router.post("/", checkRole("ADMIN", "DOCTOR", "RECEPTIONIST"), patientController.createPatients);

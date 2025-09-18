@@ -33,4 +33,4 @@ patientSchema.statics.generateMRN = async function () {
     return `P-${datePart}-${seq}`;
 
 };
-module.exports = mongoose.model("patients", patientSchema);
+module.exports = mongoose.model("Patients", patientSchema);
