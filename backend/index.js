@@ -16,7 +16,9 @@ app.use("/admin", require("./routes/admin.routes"));
 app.use("/doctor", require("./routes/doctor.routes"));
 app.use("/nurse", require("./routes/nurse.routes"));
 app.use("/reception", require("./routes/reception.routes"));
-app.use("/api/patients", require("./routes/patients.routes"))
+app.use("/api/patients", require("./routes/patients.routes"));
+app.use("/api/staff", require("./routes/staff.routes"));
+app.use("/api/report", require("./routes/report.routes"));
 app.use(errorHandler);
 app.get("/", (req, res) => {
     res.json({ status: "okay", message: "it`s working " })
